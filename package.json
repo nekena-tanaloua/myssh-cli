@@ -1,0 +1,16 @@
+{
+  "name": "myssh-cli",
+  "version": "1.0.0",
+  "description": "A CLI tool for securely managing SSH connections and workspaces with built-in encryption and interactive prompts.",
+  "type": "module",
+  "bin": {
+    "myssh": "./src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "inquirer": "^8.2.0"
+  }
+}
