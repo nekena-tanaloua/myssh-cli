@@ -21,12 +21,6 @@ export class Commands {
         throw error;
       }
 
-      if (this.manager.currentWorkspace) {
-        console.log(chalk.blue(`\n[${this.manager.currentWorkspace}]\n`));
-      } else {
-        console.log(chalk.yellow('\n[No workspace selected]\n'));
-      }
-
       const { action } = await inquirer.prompt([
         {
           type: 'list',
