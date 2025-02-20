@@ -1,13 +1,14 @@
 # MySSH CLI
 
-A **MySSH CLI** tool for securely managing SSH connections and workspaces with built-in encryption, interactive prompts, and a master password. This CLI makes it easy to store and organize your SSH connections across multiple workspaces, protecting sensitive information with AES-256-GCM encryption.
+MySSH CLI is a lightweight, secure, and fast command-line tool designed to manage your SSH connections and workspaces effortlessly. Born out of the need to handle multiple SSH accesses daily without relying on expensive third-party solutions, MySSH CLI offers a simple, customizable, and open alternative that adapts perfectly to your workflow.
 
 ## Table of contents
 
+- [Genesis of the project](#genesis-of-the-project)
 - [Features](#features)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
-  - [Global installation (Recommended)](#global-installation-recommended)
+  - [Global installation (recommended)](#global-installation-recommended)
   - [Local installation](#local-installation)
 - [Usage](#usage)
   - [First-time setup](#first-time-setup)
@@ -23,14 +24,20 @@ A **MySSH CLI** tool for securely managing SSH connections and workspaces with b
 
 ---
 
+## Genesis of the project
+
+In my daily routine, managing multiple SSH connections was becoming cumbersome. While I had been using paid software, I found that it didn’t fully align with my workflow. Wanting a more streamlined and efficient solution, I decided to develop a custom CLI tool tailored to my needs. MySSH CLI was born as a way to manage SSH access quickly, securely, and with full customization to fit my workflow perfectly.
+
+---
+
 ## Features
 
-- **Master password**: Secure all your SSH connection details behind one master password.
-- **AES-256-GCM encryption**: All saved data is encrypted at rest.
-- **Multiple workspaces**: Organize connections into separate workspaces for different projects or environments.
-- **Interactive prompts**: Easy-to-use menu system powered by [Inquirer](https://www.npmjs.com/package/inquirer).
-- **SSH integration**: Quickly connect to your servers using stored credentials and SSH keys.
-- **Reset function**: Easily wipe all stored data if you need to start over.
+- **Master password:** Secure all your SSH connection details behind one master password.
+- **AES-256-GCM encryption:** All saved data is encrypted at rest to protect your sensitive information.
+- **Multiple workspaces:** Organize connections into separate workspaces for different projects or environments.
+- **Interactive prompts:** Enjoy an easy-to-use menu system powered by [Inquirer](https://www.npmjs.com/package/inquirer).
+- **SSH integration:** Quickly connect to your servers using stored credentials and SSH keys.
+- **Reset function:** Easily wipe all stored data if you need to start over.
 
 ---
 
@@ -54,7 +61,7 @@ A **MySSH CLI** tool for securely managing SSH connections and workspaces with b
    ```bash
    npm install -g .
    ```
-4. Now you can run:
+4. Run the CLI:
    ```bash
    myssh
    ```
@@ -63,7 +70,7 @@ A **MySSH CLI** tool for securely managing SSH connections and workspaces with b
 
 Alternatively, you can install and run the tool locally:
 
-1. From your project root folder, install dependencies:
+1. From the project root folder, install dependencies:
    ```bash
    npm install
    ```
@@ -80,7 +87,7 @@ Alternatively, you can install and run the tool locally:
 
 ## Usage
 
-Once installed, run:
+Once installed, launch the CLI by running:
 
 ```bash
 myssh
@@ -101,36 +108,36 @@ This opens an interactive menu with the following options:
 
 ### First-time setup
 
-- On your **very first run**, you will be asked to create a master password if none exists.  
-- The tool will also invite you to create your first workspace.  
-- Once set, the master password encrypts your data, so be sure to remember it.
+- On your **first run**, you'll be prompted to create a master password if one doesn't exist.
+- The tool will also guide you in creating your first workspace.
+- The master password encrypts your data, so make sure to remember it.
 
 ### Available commands
 
-If you run `myssh` with arguments, you have the following options:
+When running `myssh` with command-line arguments, you can use:
 
 - **`myssh --reset`** or **`myssh -r`**  
-  Resets all stored data, removing the encrypted file from your system.  
-  Use with caution, as all saved connections will be lost.
+  Resets all stored data by removing the encrypted file from your system.  
+  *Warning: This will permanently erase all saved connections.*
 
 ### Examples
 
-- **Create a new connection**  
-  1. Run `myssh`  
-  2. Select “Add connection”  
-  3. Provide the requested info (name, host, username, SSH key path, port)  
-  4. Your new connection is stored securely in the current workspace.
+- **Creating a new connection**  
+  1. Run `myssh`.
+  2. Select “Add connection”.
+  3. Provide the required information (name, host, username, SSH key path, port).
+  4. Your new connection is securely stored in the current workspace.
 
-- **Connect to a server**  
-  1. Run `myssh`  
-  2. Select “Connect”  
-  3. Choose the connection name from the list  
-  4. An SSH session is launched in your terminal.
+- **Connecting to a server**  
+  1. Run `myssh`.
+  2. Select “Connect”.
+  3. Choose the connection from the list.
+  4. An SSH session will launch in your terminal.
 
-- **Switch workspace**  
-  1. Run `myssh`  
-  2. Select “Switch workspace”  
-  3. Pick an existing workspace or create a new one
+- **Switching workspaces**  
+  1. Run `myssh`.
+  2. Select “Switch workspace”.
+  3. Choose an existing workspace or create a new one.
 
 ---
 
@@ -138,41 +145,41 @@ If you run `myssh` with arguments, you have the following options:
 
 ### Master password
 
-The first time you run the CLI (or if no config file is found), you are prompted to **create a new master password**. This password is used to encrypt and decrypt your SSH connection data.  
-- Must be at least 8 characters long.  
-- The tool will ask for it on subsequent runs to decrypt your existing connections.
+Upon first launch (or if no configuration file is found), you will be prompted to **create a master password**. This password is used to encrypt and decrypt your SSH connection data.
+- Must be at least 8 characters long.
+- You will need to enter the master password on subsequent runs to access your encrypted data.
 
 ### Encrypted storage
 
-All data is stored in a JSON file (by default `~/.ssh-manager`) but in an **AES-256-GCM** encrypted format. This means:
-- Even if someone gets access to your `.ssh-manager` file, they cannot read your SSH credentials without your master password.  
+All data is stored in a JSON file (by default `~/.ssh-manager`) in an **AES-256-GCM** encrypted format. This ensures:
+- Even if someone gains access to your `.ssh-manager` file, they cannot read your SSH credentials without the master password.
 - Encryption and decryption are handled via Node’s built-in `crypto` module.
 
 ### Workspaces
 
-Workspaces help you organize different sets of SSH connections. For example, you might have:  
-- A `production` workspace with your production servers.  
-- A `staging` workspace for QA or test environments.  
-- A `personal` workspace for your private servers.
+Workspaces allow you to organize different sets of SSH connections. For example, you might have:
+- A `production` workspace for live servers.
+- A `staging` workspace for testing or QA environments.
+- A `personal` workspace for private servers.
 
-You can create or switch between workspaces using the menu. Each workspace keeps its own set of connections.
+You can switch between workspaces or create new ones directly from the CLI menu, keeping your connections neatly organized.
 
 ---
 
 ## FAQ
 
 **1. What happens if I forget my master password?**  
-Unfortunately, if you forget your master password, there is no way to recover your existing encrypted data. You can reset the database (`myssh --reset`) to start over with a new master password, but you will lose all previously stored connections.
+Unfortunately, if you forget your master password, your encrypted data cannot be recovered. You can reset the database using `myssh --reset`, but this will permanently erase all saved connections.
 
 **2. Where is the data stored?**  
-By default, the CLI stores an encrypted JSON file in your home directory, named `.ssh-manager`. You can change this path by modifying the config.
+By default, MySSH CLI stores an encrypted JSON file in your home directory, named `.ssh-manager`. This path can be modified in the configuration if needed.
 
 **3. Can I use password-based SSH instead of keys?**  
-Currently, the CLI is designed to store hostnames, ports, usernames, and SSH keys. You can manually connect using password-based SSH after the session starts, but the CLI does not store SSH passwords. For better security, we recommend SSH keys.
+MySSH CLI is designed to store hostnames, ports, usernames, and SSH keys. While you can manually enter a password during an SSH session, the CLI does not store passwords for security reasons. For enhanced security, we recommend using SSH keys.
 
-**4. How do I uninstall the CLI?**  
-- Remove the global installation: `npm uninstall -g myssh-cli`.  
-- Delete the `.ssh-manager` file in your home directory if you want to remove all stored data.
+**4. How do I uninstall MySSH CLI?**  
+- Remove the global installation with: `npm uninstall -g myssh-cli`.
+- Delete the `.ssh-manager` file from your home directory if you wish to remove all stored data.
 
 ---
 
@@ -181,11 +188,11 @@ Currently, the CLI is designed to store hostnames, ports, usernames, and SSH key
 Contributions are welcome! To get started:
 
 1. **Fork** this repository and clone it locally.
-2. **Create** a new branch for your feature or fix.
+2. **Create** a new branch for your feature or bug fix.
 3. **Commit** your changes and push them to your fork.
 4. Open a **pull request** describing your changes.
 
-Please ensure your code is well tested and follows a consistent style. Feel free to open an issue for any questions or suggestions.
+Please ensure your code is well-tested and adheres to the project's coding standards. Feel free to open an issue for any questions or suggestions.
 
 ---
 
@@ -198,4 +205,4 @@ See the [LICENSE](LICENSE) file for more details.
 
 ### Enjoy MySSH CLI!
 
-If you have any feedback, questions, or issues, feel free to open a GitHub issue or submit a pull request. Happy SSH-ing!
+If you have any feedback, questions, or issues, please open a GitHub issue or submit a pull request. Happy SSH-ing! 🚀
